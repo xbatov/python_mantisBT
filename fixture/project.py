@@ -44,7 +44,7 @@ class ProjectHelper:
         category = wd.find_element_by_name('inherit_global')
         category.send_keys("%s" % project.categories)
         select_view_status = Select(wd.find_element_by_name('view_state'))
-        select_view_status.select_by_visible_text("%s" % project.view_status)
+        select_view_status.select_by_visible_text("%s" % project.view_state)
 
     def change_field_value(self, field_name, text):
         wd = self.app.wd
@@ -81,6 +81,6 @@ class ProjectHelper:
             href.startswith(expected_prefix)
             # Вычисляем ID проекта на основе длины динамического префикса
             id_css = href[len(expected_prefix):]
-            if id == id_css:
+            if id == int(id_css):
                 wd.find_element_by_link_text("%s" % name).click()
                 break

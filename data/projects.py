@@ -10,7 +10,7 @@ def random_status():
     values = ["development", "release", "stable", "obsolete"]
     return "".join(random.choice(values))
 
-def random_view_status():
+def random_view_state():
     values = ["public", "private"]
     return "".join(random.choice(values))
 
@@ -19,5 +19,5 @@ def random_description(maxlen):
     return "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
 
 testdata =  [
-    Project(name=random_name(10), status=random_status(), view_status=random_view_status(), description=random_description(50)),
+    Project(name=random_name(10), status=random_status(), view_state=random_view_state(), description=random_description(50)),
             ]
