@@ -6,7 +6,6 @@ from fixture.application import Application
 fixture = None
 target = None
 
-
 def load_config(file):
     global target
     if target is None:
@@ -14,7 +13,6 @@ def load_config(file):
         with open(config_file) as f:
             target = json.load(f)
     return target
-
 
 @pytest.fixture
 def app(request):
@@ -25,7 +23,6 @@ def app(request):
         fixture = Application(browser=browser, base_url=web_config['baseUrl'])
     return fixture
 
-
 @pytest.fixture(scope="session", autouse=True)
 def stop(request):
     def fin():
@@ -33,7 +30,6 @@ def stop(request):
         fixture.destroy()
     request.addfinalizer(fin)
     return fixture
-
 
 def pytest_addoption(parser):
     parser.addoption("--browser", action="store", default="firefox") #chrome
