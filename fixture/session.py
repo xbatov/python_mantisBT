@@ -2,7 +2,12 @@ class SessionHelper:
     def __init__(self, app):
         self.app = app
 
-    def login(self, username, password):
+    def login(self, username=None, password=None):
+        # Если логин/пароль не указаны - берем из конфига
+        if username is None:
+            username = self.app.config['webadmin']['username']
+        if password is None:
+            password = self.app.config['webadmin']['password']
         wd = self.app.wd
         self.app.open_home_page()
         wd.find_element_by_name("username").click()
@@ -34,8 +39,11 @@ class SessionHelper:
         if self.is_logged_in():
             self.logout()
 
-    def ensure_login(self, username, password):
+    def ensure_login(self, username=None, password=None):
         wd = self.app.wd
+        # Берем данные из конфига, если не указаны явно
+        username = username or self.app.config['webadmin']['username']
+        password = password or self.app.config['webadmin']['password']
         if self.is_logged_in():
             if self.is_logged_in_as(username):
                 return

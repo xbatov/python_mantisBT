@@ -18,9 +18,10 @@ def load_config(file):
 def app(request):
     global fixture
     browser = request.config.getoption("--browser")
-    web_config = load_config(request.config.getoption("--target"))['web']
+    config = load_config(request.config.getoption("--target"))
     if fixture is None or not fixture.is_valid():
-        fixture = Application(browser=browser, base_url=web_config['baseUrl'])
+        fixture = Application(browser=browser, config=config)
+        fixture.session.ensure_login()
     return fixture
 
 @pytest.fixture(scope="session", autouse=True)
