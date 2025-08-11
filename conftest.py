@@ -36,5 +36,5 @@ def stop(request):
 
 
 def pytest_addoption(parser):
-    parser.addoption("--browser", action="store", default="chrome")
+    parser.addoption("--browser", action="store", default="firefox") #chrome
     parser.addoption("--target", action="store", default="target.json")
